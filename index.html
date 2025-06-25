@@ -1,36 +1,51 @@
-<!DOCTYPE html>
+¡<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Sistema Financiero y Bancos del Perú</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    :root {
+      --azul: #0f3460;
+      --azul-claro: #16213e;
+      --gris: #f4f4f4;
+      --blanco: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background-color: #f4f4f4;
+      background: var(--gris);
+      color: #333;
     }
 
     header {
-      background-color: #16213e;
-      color: white;
-      padding: 20px;
+      background: var(--azul-claro);
+      color: var(--blanco);
       text-align: center;
+      padding: 1.5rem 1rem;
     }
 
     nav {
-      background-color: #0f3460;
-      padding: 10px 0;
+      background: var(--azul);
       display: flex;
       justify-content: center;
-      gap: 30px;
+      gap: 2rem;
+      padding: 1rem;
+      flex-wrap: wrap;
     }
 
     nav a {
-      color: white;
+      color: var(--blanco);
       text-decoration: none;
       font-weight: bold;
-      transition: color 0.3s;
+      transition: color 0.3s ease;
     }
 
     nav a:hover {
@@ -38,117 +53,135 @@
     }
 
     .content {
-      padding: 30px;
       max-width: 1000px;
-      margin: auto;
+      margin: 2rem auto;
+      padding: 0 1rem;
     }
 
-    .section {
-      margin-bottom: 40px;
+    section {
+      margin-bottom: 3rem;
+      background: var(--blanco);
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     h2 {
-      color: #0f3460;
+      color: var(--azul-claro);
+      margin-bottom: 1rem;
+    }
+
+    p {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      cursor: pointer;
+      padding: 0.75rem 1.5rem;
+      background: var(--azul);
+      color: var(--blanco);
+      border: none;
+      border-radius: 6px;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      background: var(--azul-claro);
+      transform: scale(1.03);
+    }
+
+    .bank-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
     }
 
     .bank-buttons button {
-      margin: 10px 5px;
-      padding: 10px 20px;
-      border: none;
-      background-color: #0f3460;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .bank-buttons button:hover {
-      background-color: #1a438f;
+      flex: 1;
+      min-width: 120px;
     }
 
     .bank-info {
-      margin-top: 20px;
-      padding: 20px;
-      background-color: #e0e0e0;
-      border-radius: 10px;
       display: none;
-    }
-
-    .genially-btn {
-      background-color: #0f3460;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .genially-btn:hover {
-      background-color: #1a438f;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #e8eaf6;
+      border-left: 4px solid var(--azul);
+      border-radius: 6px;
+      animation: fadedown 0.3s;
     }
 
     .modal {
       display: none;
       position: fixed;
-      z-index: 10;
-      left: 0;
       top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.7);
-      animation: fadeIn 0.4s ease-in-out;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal.active {
+      display: flex;
     }
 
     .modal-content {
-      background-color: white;
-      margin: 5% auto;
-      padding: 20px;
-      border-radius: 10px;
+      background: var(--blanco);
+      padding: 1rem;
       width: 90%;
       max-width: 800px;
       position: relative;
-      animation: slideUp 0.4s ease-out;
+      border-radius: 10px;
+      animation: slideIn 0.4s ease-out;
     }
 
-    .close {
+    .modal .close {
       position: absolute;
       top: 10px;
-      right: 20px;
+      right: 16px;
       font-size: 28px;
-      color: #555;
       cursor: pointer;
+      color: #555;
     }
 
-    iframe {
+    .modal iframe {
       width: 100%;
-      height: 500px;
+      height: 450px;
       border: none;
       border-radius: 6px;
     }
 
     footer {
-      background-color: #0f3460;
-      color: white;
+      background: var(--azul);
+      color: var(--blanco);
       text-align: center;
-      padding: 20px;
-      margin-top: 40px;
+      padding: 1.2rem;
+      margin-top: 2rem;
     }
 
-    footer small {
-      font-size: 14px;
+    @keyframes slideIn {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes slideUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    @keyframes fadedown {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
   </style>
 </head>
@@ -161,41 +194,96 @@
   <nav>
     <a href="#inicio">Inicio</a>
     <a href="#sistema">Sistema Financiero</a>
+    <a href="#estructura">Estructura</a>
     <a href="#bancos">Bancos</a>
-    <a href="#genially">Presentación</a>
+    <a href="#presentacion">Presentación</a>
     <a href="#contacto">Contacto</a>
   </nav>
 
   <div class="content">
-    <div class="section" id="sistema">
+    <section id="inicio">
+      <h2>Bienvenida</h2>
+      <p>Explora cómo funciona el sistema financiero en el Perú, sus reguladores y los principales bancos. Todo interactivo y actualizado.</p>
+    </section>
+
+    <section id="sistema">
       <h2>¿Qué es el sistema financiero?</h2>
-      <p>Es el conjunto de instituciones, medios y mercados que permiten canalizar el ahorro hacia la inversión, facilitando el flujo de dinero entre los agentes económicos.</p>
-    </div>
+      <p>Es el conjunto de instituciones, mercados, instrumentos y reglas que canalizan el ahorro hacia la inversión y gestionan el flujo de dinero en la economía peruana.</p>
+      <p>Está compuesto por el Banco Central (BCRP), la SBS, la SMV, la banca múltiple y otras entidades no bancarias.</p>
+      <p>Se divide en financiamiento directo (bonos, acciones) e indirecto (créditos vía entidades financieras).</p>
+    </section>
 
-    <div class="section">
-      <h2>¿Qué son los bancos?</h2>
-      <p>Los bancos son entidades que forman parte del sistema financiero, dedicadas a captar recursos del público (ahorro) y otorgar créditos, entre otras funciones.</p>
-    </div>
+    <section id="estructura">
+      <h2>🏗️ Estructura del Sistema Financiero</h2>
+      <p><strong>1. Entidades Financieras (Intermediarios):</strong></p>
+      <ul>
+        <li>Bancos múltiples o comerciales</li>
+        <li>Cajas municipales y rurales</li>
+        <li>Financieras</li>
+        <li>Cooperativas de ahorro y crédito</li>
+        <li>AFP (Administradoras de Fondos de Pensiones)</li>
+        <li>Compañías de seguros</li>
+      </ul>
+      <p><strong>2. Organismos Reguladores y Supervisores:</strong></p>
+      <ul>
+        <li>SBS: supervisa bancos, AFP, aseguradoras</li>
+        <li>BCRP: controla inflación y emite moneda</li>
+        <li>MEF: diseña políticas fiscales</li>
+      </ul>
+      <p><strong>3. Mercados Financieros:</strong></p>
+      <ul>
+        <li>Bolsa de Valores de Lima (BVL)</li>
+        <li>CAVALI: registro contable de operaciones</li>
+      </ul>
 
-    <div class="section" id="genially">
-      <button class="genially-btn" onclick="abrirModal()">Ver presentación Genially</button>
-    </div>
+      <h3>🧾 Instrumentos Financieros:</h3>
+      <ul>
+        <li>Créditos, préstamos</li>
+        <li>Depósitos, cuentas de ahorro</li>
+        <li>Acciones, bonos, fondos mutuos</li>
+        <li>Seguros</li>
+      </ul>
 
-    <div class="section" id="bancos">
-      <h2>Bancos del Perú</h2>
+      <h3>📊 Importancia del Sistema Financiero:</h3>
+      <ul>
+        <li>Fomenta inversión y emprendimiento</li>
+        <li>Facilita acceso a crédito</li>
+        <li>Protege y rentabiliza el ahorro</li>
+        <li>Control fiscal y estabilidad económica</li>
+      </ul>
+
+      <h3>🚨 Problemas Comunes:</h3>
+      <ul>
+        <li>Sobreendeudamiento</li>
+        <li>Exclusión financiera</li>
+        <li>Riesgos como fraudes y entidades informales</li>
+      </ul>
+    </section>
+
+    <section id="bancos">
+      <h2>Principales Bancos del Perú</h2>
       <div class="bank-buttons">
-        <button onclick="mostrarInfo('bcp')">BCP</button>
-        <button onclick="mostrarInfo('bbva')">BBVA</button>
-        <button onclick="mostrarInfo('interbank')">Interbank</button>
-        <button onclick="mostrarInfo('banbif')">BANBIF</button>
-        <button onclick="mostrarInfo('bn')">Banco de la Nación</button>
+        <button class="btn" onclick="mostrarInfo('bcp')">BCP</button>
+        <button class="btn" onclick="mostrarInfo('bbva')">BBVA</button>
+        <button class="btn" onclick="mostrarInfo('interbank')">Interbank</button>
+        <button class="btn" onclick="mostrarInfo('banbif')">BANBIF</button>
+        <button class="btn" onclick="mostrarInfo('bn')">Banco de la Nación</button>
       </div>
-
       <div id="bank-info" class="bank-info"></div>
-    </div>
+    </section>
+
+    <section id="presentacion">
+      <h2>Presentación Interactiva</h2>
+      <button class="btn" onclick="abrirModal()">Ver presentación Genially</button>
+    </section>
+
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <p>¿Tienes dudas o sugerencias? <a href="mailto:info@sistemafinanciero.com">Contáctanos por correo</a>.</p>
+    </section>
   </div>
 
-  <div id="miModal" class="modal">
+  <div id="modal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="cerrarModal()">&times;</span>
       <iframe src="https://view.genially.com/6848eb6a74afb283cef46952/interactive-content-sistema-financiero" allowfullscreen></iframe>
@@ -208,37 +296,32 @@
 
   <script>
     const infoBancos = {
-      bcp: "El BCP (Banco de Crédito del Perú) es uno de los bancos más grandes del país, con una amplia red de agencias y servicios financieros variados.",
-      bbva: "El BBVA Perú forma parte del grupo financiero internacional BBVA. Ofrece servicios digitales, préstamos, cuentas de ahorro y más.",
-      interbank: "Interbank se destaca por su innovación tecnológica y experiencia de usuario. Ofrece productos bancarios accesibles y rápidos.",
-      banbif: "BANBIF es un banco peruano enfocado en personas y pequeñas empresas, con servicios competitivos y atención personalizada.",
-      bn: "El Banco de la Nación es una entidad estatal que brinda servicios financieros al sector público y a la población en general."
+      bcp: "El BCP es el banco más grande del Perú, con amplia cobertura nacional. Ofrece ahorro, crédito, inversiones y banca digital.",
+      bbva: "El BBVA Perú es parte del grupo financiero global BBVA. Destaca por su banca digital, préstamos y productos de ahorro.",
+      interbank: "Interbank es reconocido por su innovación y experiencia digital. Tiene servicios orientados a jóvenes y emprendedores.",
+      banbif: "BANBIF es un banco peruano con enfoque en personas y pequeñas empresas. Ofrece atención personalizada y servicios digitales.",
+      bn: "El Banco de la Nación brinda servicios financieros a trabajadores del Estado y ciudadanos, especialmente en zonas rurales."
     };
 
     function mostrarInfo(banco) {
       const div = document.getElementById('bank-info');
-      div.style.display = 'block';
       div.innerText = infoBancos[banco];
+      div.style.display = 'block';
     }
 
     function abrirModal() {
-      document.getElementById('miModal').style.display = 'block';
+      document.getElementById('modal').classList.add('active');
     }
 
     function cerrarModal() {
-      document.getElementById('miModal').style.display = 'none';
+      document.getElementById('modal').classList.remove('active');
     }
 
-    window.onclick = function(event) {
-      const modal = document.getElementById('miModal');
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
+    window.onclick = function(e) {
+      if (e.target == document.getElementById('modal')) cerrarModal();
+    };
   </script>
-
 </body>
 </html>
-
 
 
